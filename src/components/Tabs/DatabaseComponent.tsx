@@ -1,22 +1,22 @@
 import MaterialTable from "material-table";
 import React from "react";
 import { connect } from "react-redux";
-import { setMapData, setTableData, setTimeLineData } from "../../redux/actions";
+import { setMapData, setTableData, setTimeLineData, setWordCloudData } from "../../redux/actions";
 import { initializeResetData } from "../../redux/reducers/abolitionData";
 import { Details } from "./Details";
 
 export function DatabaseComponent(props: any) {
-  console.log("DatabaseComponent");
   const tableRef = props.tableRef;
 
   let columns = props.columns;
   const tableDataFiltered = (data: any) => {
-    console.log(tableDataFiltered, data);
     if (data.length === 0) {
       const resetData = initializeResetData();
+      console.log(resetData);
       props.setTimeLineData({ timelineData: resetData.timelineData });
       props.setTableData({ tableData: resetData.tableData });
       props.setMapData({ mapData: resetData.mapData });
+      props.setWordCloudData({wordcloudData: resetData.wordcloudData});
       console.log("cleared");
     } else {
       const finalData = tableRef.current.state.data.map((d: any) => ({
@@ -62,9 +62,15 @@ export function DatabaseComponent(props: any) {
           } else return {};
         }, {})
       );
+
+      const wordcloud = tableRef.current.state.data.map((d: any) => ({
+        text: d.summary,
+        value: d.letter,
+      }));
       props.setTimeLineData({ timelineData: timeline });
       props.setTableData({ tableData: finalData });
       props.setMapData({ mapData: result });
+      props.setWordCloudData({wordcloudData: wordcloud});
     }
   };
   columns = props.columns.filter((d: any) => {
@@ -103,4 +109,5 @@ export default connect(mapStateToProps, {
   setMapData,
   setTableData,
   setTimeLineData,
+  setWordCloudData,
 })(DatabaseComponent);

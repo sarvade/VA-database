@@ -13,7 +13,6 @@ if (typeof window !== "undefined") {
 }
 
 export const MapComponent = (props: any) => {
-  console.log("MapComponent");
   let mapOptions = {
     chart: {
       borderWidth: 1,

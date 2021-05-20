@@ -2,6 +2,7 @@ import {
   SET_MAP_DATA,
   SET_TABLE_DATA,
   SET_TIMELINE_DATA,
+  SET_WORDCLOUD_DATA,
   SET_COLUMNS,
 } from "../actionTypes";
 import data from "../../vadata.json";
@@ -48,6 +49,27 @@ export const initializeData = (data: any) => {
       } else return {};
     }, {})
   );
+  const wordcloud = mData.map((d: any) => ({
+    text: d.summary,
+    value: d.letter,
+  }));
+
+  const wordcloudOptions = {
+    colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"],
+    enableTooltip: true,
+    deterministic: false,
+    fontFamily: "impact",
+    fontSizes: [20, 30],
+    fontStyle: "normal",
+    fontWeight: "normal",
+    padding: 1,
+    rotations: 3,
+    rotationAngles: [0, 90],
+    scale: "sqrt",
+    spiral: "archimedean",
+    transitionDuration: 1000
+    };
+  
   const columns = [
     { show: false, title: "ID", field: "id" },
     { show: false, title: "Letter", field: "letter" },
@@ -64,6 +86,8 @@ export const initializeData = (data: any) => {
     mapData: [...result],
     tableData: [...finalData],
     timelineData: [...timeline],
+    wordcloudData: [...wordcloud],
+    wordcloudoptionsData: wordcloudOptions, 
     columns,
   };
 };
@@ -87,6 +111,11 @@ export const abolitionData = (state = initialState, action: any) => {
     case SET_TIMELINE_DATA:
       return Object.assign({}, state, {
         timelineData: action.timelineData,
+        action: action,
+      });
+    case SET_WORDCLOUD_DATA:
+      return Object.assign({}, state, {
+        wordcloudData: action.wordcloudData,
         action: action,
       });
     case SET_COLUMNS:

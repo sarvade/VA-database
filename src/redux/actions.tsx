@@ -3,6 +3,7 @@ import {
   SET_MAP_DATA,
   SET_TABLE_DATA,
   SET_TIMELINE_DATA,
+  SET_WORDCLOUD_DATA,
 } from "./actionTypes";
 export const setMapData = (content: any) => {
   return {
@@ -17,10 +18,15 @@ export const setTableData = (content: any) => {
   };
 };
 export const setTimeLineData = (content: any) => {
-  console.log("SET_TIMELINE_DATA");
   return {
     type: SET_TIMELINE_DATA,
     timelineData: content.timelineData,
+  };
+};
+export const setWordCloudData = (content: any) => {
+  return {
+    type: SET_WORDCLOUD_DATA,
+    wordcloudData: content.wordcloudData,
   };
 };
 export const setColumns = (content: any) => {
