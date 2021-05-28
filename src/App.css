@@ -1,6 +1,10 @@
+body{
+
+    background-image:linear-gradient(rgb(216, 186, 245),whitesmoke)
+}
 .App-header {
     background-color: #282c34;
-    min-height: 100vh;
+    min-height: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,11 +12,114 @@
     font-size: calc(10px + 2vmin);
     color: rgb(143, 29, 29);
 }
-
+.database-component{
+    font-size: 12px;
+}
 .database-component>div>.MuiToolbar-root {
     display: none;
 }
 
 table>thead>tr>th {
     font-weight: bold !important;
+    height: 60px;
+}
+
+table>tbody>tr>td{
+    padding-top: 5px ;
+
+}
+.body-main{
+    display: flex;
+}
+.main-toolbar{
+    padding:20px;
+    padding-left: 50px;
+    padding-top: 50px;
+    display: inline-block;
+    width: 20%;
+    position: relative;    
+}
+
+
+.toolbar{
+    padding : 30px;
+    display: block;
+    height: 100%;
+}
+.Tabs-comp{
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    padding-top: 50px;
+}
+@media screen and (max-width : 1000px) {
+    
+.body-main{
+    display: flex;
+    justify-content: stretch;
+}
+.main-toolbar{
+    width: 100%;
+    display: block;
+    position: relative;
+    padding: 50px;        
+    padding-bottom: 2px;
+}
+
+
+.toolbar{
+        padding : 30px;
+        width: 80%;
+        display: block;
+        position: relative;
+        margin-left: 50%;
+        transform: translate(-50%,0);
+}
+    .Tabs-comp{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding-top: 0px;
+        
+        
+    }
+    .tab {
+        width: 100%;
+        position: relative;
+    
+    }
+}
+
+
+.splash-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-screen .loading-dot {
+  font-size: 100px;
+  margin-top: -80px;
+  position: relative;
+  animation: ease-in-out infinite alternate;
+  animation-name: run;
+  animation-duration: 1.2s;
+}
+
+@keyframes run {
+  0% {
+    left: -90px;
+    color: #eee;
+  }
+  50% {
+    color: #666;
+  }
+  100% {
+    left: 90px;
+    color: #eee;
+  }
 }

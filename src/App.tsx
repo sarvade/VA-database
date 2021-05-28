@@ -1,29 +1,22 @@
-import { Grid } from "@material-ui/core";
+
 import React from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import { TabsComponent } from "./components/Tabs";
 import ToolbarComponent from "./components/ToolbarComponent";
 import { setMapData, setTableData, setTimeLineData, setWordCloudData } from "./redux/actions";
-
+import withSplashScreen from './Loading.js'
 function App() {
   const tableRef = React.createRef();
   return (
     <>
-      <Grid
-        container
-        style={{
-          paddingTop: "30px",
-          paddingLeft: "30px",
-          paddingRight: "30px",
-        }}
-        spacing={5}
-      >
-        <Grid item xs={2} style={{ minWidth: "160px" }}>
+      <div  className="row Body-main">
+        <div className=" col-lg-3 main-toolbar" >
           <ToolbarComponent tableRef={tableRef}></ToolbarComponent>
-        </Grid>
-        <TabsComponent tableRef={tableRef}></TabsComponent>
-      </Grid>
+        </div>
+        <div className="col-lg-9 Tabs-comp">    <TabsComponent className="tab" tableRef={tableRef}></TabsComponent>
+    </div>
+      </div>
     </>
   );
 }
@@ -35,4 +28,4 @@ export default connect(mapStateToProps, {
   setTableData,
   setTimeLineData,
   setWordCloudData,
-})(App);
+})(withSplashScreen(App));

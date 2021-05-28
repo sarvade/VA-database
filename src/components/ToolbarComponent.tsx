@@ -12,8 +12,11 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+
+import '../App.css'
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
+//import {useAlert} from 'react-alert';
 import { connect } from "react-redux";
 import {
   setColumns,
@@ -32,7 +35,7 @@ export const ToolbarComponent = (props: any) => {
   };
   const [sliderValue, setSliderValue] = React.useState([1816, 1900]);
   const [expanded, setExpanded] = React.useState(false);
-
+  //const alert = useAlert();
   const marks = [
     {
       value: 1816,
@@ -45,10 +48,13 @@ export const ToolbarComponent = (props: any) => {
   ];
   const handleSliderChange = (event: any, newValue: any) => {
     // _.debounce(, 500)
-    setSliderValue(newValue);
-  };
+    setSliderValue(newValue)
+    
+    
+  }
   const handleDateChange = (newValue1: any, newValue2: any) => {
     setSliderValue([newValue1, newValue2]);
+  
   };
   const applyDateChange = () => {
     const newTableData = props.tableRef.current.dataManager.data.filter(
@@ -105,16 +111,16 @@ export const ToolbarComponent = (props: any) => {
     document.body.removeChild(element);
   };
   return (
-    <Paper style={{ padding: "20px", textAlign: "center" }}>
-      <Typography variant="h4" component="div" style={{ marginBottom: "10px" }}>
-        ToolBar
+    <Paper className="toolbar">
+      <Typography variant="h4" component="div" style={{fontWeight:'bolder', marginBottom: "10px",fontSize:'20px' }}>
+        TOOLBAR
       </Typography>
       <Accordion
         expanded={expanded}
         onChange={() => {
           setExpanded(!expanded);
         }}
-        style={{ marginBottom: "2rem" }}
+        style={{fontSize:'12px', marginBottom: "10px" }}
       >
         <AccordionSummary
           style={{
@@ -153,19 +159,26 @@ export const ToolbarComponent = (props: any) => {
         </AccordionDetails>
       </Accordion>
       <Grid container xs={12} justify="center" alignItems="center">
-        <Grid item xs={4}>
+        <Grid item xs={12}>
           <Typography id="range-slider" gutterBottom>
             Date Range
           </Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12}
+        
+        style={{ width: "80px",
+        margin : "20px",
+        display: "flex"
+        }}>
           <TextField
             label="Start Date"
             id="filled-size-small1"
             variant="filled"
             size="small"
             value={sliderValue[0]}
-            style={{ width: "80px" }}
+            style={{ width: "80px",
+                    marginLeft : "20px"
+          }}
             onChange={(newValue) => {
               handleDateChange(newValue.currentTarget.value, sliderValue[1]);
             }}
@@ -176,7 +189,8 @@ export const ToolbarComponent = (props: any) => {
             variant="filled"
             size="small"
             value={sliderValue[1]}
-            style={{ width: "80px" }}
+            style={{ width: "80px",
+            marginLeft : "20px" }}
             onChange={(newValue) => {
               handleDateChange(sliderValue[0], newValue.currentTarget.value);
             }}
@@ -184,28 +198,35 @@ export const ToolbarComponent = (props: any) => {
         </Grid>
       </Grid>
       <Slider
-        style={{ width: "120px" }}
+        style={{ width: "80%",marginLeft:"10%",marginBottom:"30px" }}
         value={sliderValue}
         step={10}
         onChange={handleSliderChange}
+        
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         marks={marks}
         min={1816}
         max={1900}
       />
-      <Button onClick={applyDateChange} variant="contained" color="primary">
+      <Grid style={{
+      display:'inline-block'
+      }}>
+      <Button style={{marginBottom:'10px',width:'100%'}}  onClick={applyDateChange} variant="contained" color="primary">
         Apply Date Change
       </Button>
-      <Typography gutterBottom>Number of Results:</Typography>
+      <Typography  style={{marginTop:'30px',borderBottom:'1px solid black'}} gutterBottom>Number of Results:</Typography>
       <Typography variant="h5" component="div">
         {props.tableData.length}
       </Typography>
       <br></br>
       <Button
-        variant="outlined"
+       style={{width:'100%'}}
+       variant="outlined"
         onClick={() => {
           download("CSV");
+        //  alert.show('Your Json file Download will start soon!')
+
         }}
         // startIcon={<DownloadIcon />}
       >
@@ -213,14 +234,17 @@ export const ToolbarComponent = (props: any) => {
       </Button>
       <br></br> <br></br>
       <Button
+       style={{width:'100%'}}
         variant="outlined"
         onClick={() => {
-          download("JSON");
+          download("JSON")
+      //  alert.show('Your Json file Download will start soon!')
         }}
+
         //  startIcon={<DownloadIcon />}
       >
         Download JSON
-      </Button>
+      </Button></Grid>
       <br></br>
       <br></br>
     </Paper>

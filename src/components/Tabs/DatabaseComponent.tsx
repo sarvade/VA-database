@@ -1,11 +1,12 @@
 import MaterialTable from "material-table";
-import React from "react";
+import React, {Suspense} from "react";
+import {lazily} from 'react-lazily'
 import { connect } from "react-redux";
 import { setMapData, setTableData, setTimeLineData, setWordCloudData } from "../../redux/actions";
 import { initializeResetData } from "../../redux/reducers/abolitionData";
-import { Details } from "./Details";
-
-export function DatabaseComponent(props: any) {
+const {Details} = lazily(()=>import('./Details'))
+/*import {Details} from "./Details";
+*/export function DatabaseComponent(props: any) {
   const tableRef = props.tableRef;
 
   let columns = props.columns;
@@ -91,8 +92,10 @@ export function DatabaseComponent(props: any) {
         detailPanel={(data: any) => {
           return (
             <div style={{ padding: "10px" }}>
-              <Details data={data}></Details>
-            </div>
+             <Suspense fallback={
+               <div>loading</div>
+             }> <Details data={data}/>
+             </Suspense></div>
           );
         }}
       />

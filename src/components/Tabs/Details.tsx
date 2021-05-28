@@ -1,9 +1,8 @@
-import { Grid } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -15,17 +14,19 @@ const useStyles = makeStyles({
     transform: "scale(0.8)",
   },
   title: {
-    fontSize: 14,
+    fontSize: 13,
   },
   pos: {
     marginBottom: 12,
+    fontSize: 13
   },
 });
 
+
 export const Details = (props: any) => {
-  const classes = useStyles();
-  return (
-    <Card className={classes.root} variant="outlined">
+const classes = useStyles();
+   return (
+  <Card className={classes.root} variant="outlined">
       <Grid container>
         <Grid item xs={4}>
           <CardContent>
@@ -68,5 +69,47 @@ export const Details = (props: any) => {
         </Grid>
       </Grid>
     </Card>
-  );
+/*  <div className="row " style={{width:'100%'}}>
+      
+        <div className="col-sm-4">
+          <CardContent>
+            <p  color="textSecondary">
+              ID : {props.data.id}
+            </p>{" "}
+            <p  color="textSecondary">
+              Date Sent : {props.data.dateSent}
+            </p>{" "}
+            <p  color="textSecondary">
+              Date Received : {props.data.dateReceived}
+            </p>
+          </CardContent>
+        </div>
+        <div className="col-sm-4">
+          <CardContent>
+            <p  color="textSecondary">
+              Imputed Origin : {props.data.impor}
+            </p>{" "}
+            <p  color="textSecondary">
+              Letter : {props.data.letter}
+            </p>{" "}
+            <p  color="textSecondary">
+              Summary : {props.data.summary}
+            </p>
+          </CardContent>
+        </div>
+        <div className="col-sm-4">
+          <CardContent>
+            <p  color="textSecondary">
+              Origin : {props.data.origin}
+            </p>{" "}
+            <p  color="textSecondary">
+              Sender : {props.data.sender}
+            </p>{" "}
+            <p  color="textSecondary">
+              Receiver: {props.data.receiver}
+            </p>
+          </CardContent>
+        </div>
+    </div>
+*/  );
 };
