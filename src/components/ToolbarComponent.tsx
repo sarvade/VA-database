@@ -20,6 +20,7 @@ import {
   setMapData,
   setTableData,
   setTimeLineData,
+  setWordCloudData,
 } from "../redux/actions";
 import { initializeData } from "../redux/reducers/abolitionData";
 
@@ -58,11 +59,11 @@ export const ToolbarComponent = (props: any) => {
         );
       }
     );
-
     const newData = initializeData(newTableData);
     props.setTimeLineData({ timelineData: newData.timelineData });
     props.setTableData({ tableData: newData.tableData });
     props.setMapData({ mapData: newData.mapData });
+    props.setWordCloudData({wordcloudData: newData.wordcloudData });
   };
   const arrayToCSV = (data: any) => {
     let csv = data.map((row: any) => Object.values(row));
@@ -108,82 +109,12 @@ export const ToolbarComponent = (props: any) => {
       <Typography variant="h4" component="div" style={{ marginBottom: "10px" }}>
         ToolBar
       </Typography>
-      <Grid container xs={12} justify="center" alignItems="center">
-        <Grid item xs={4}>
-          <Typography id="range-slider" gutterBottom>
-            Date Range
-          </Typography>
-        </Grid>{" "}
-        <Grid item xs={8}>
-          <TextField
-            label="Start Date"
-            id="filled-size-small1"
-            variant="filled"
-            size="small"
-            value={sliderValue[0]}
-            style={{ width: "80px" }}
-            onChange={(newValue) => {
-              handleDateChange(newValue.currentTarget.value, sliderValue[1]);
-            }}
-          />
-          <TextField
-            label="End Date"
-            id="filled-size-small2"
-            variant="filled"
-            size="small"
-            value={sliderValue[1]}
-            style={{ width: "80px" }}
-            onChange={(newValue) => {
-              handleDateChange(sliderValue[0], newValue.currentTarget.value);
-            }}
-          />
-        </Grid>
-      </Grid>
-      <Slider
-        style={{ width: "120px" }}
-        value={sliderValue}
-        step={10}
-        onChange={handleSliderChange}
-        valueLabelDisplay="auto"
-        aria-labelledby="range-slider"
-        marks={marks}
-        min={1816}
-        max={1900}
-      />{" "}
-      <Button onClick={applyDateChange} variant="contained" color="primary">
-        Apply Date Change
-      </Button>
-      <Typography gutterBottom>Number of Results:</Typography>
-      <Typography variant="h5" component="div">
-        {props.tableData.length}
-      </Typography>
-      <br></br>
-      <Button
-        variant="outlined"
-        onClick={() => {
-          download("CSV");
-        }}
-        // startIcon={<DownloadIcon />}
-      >
-        Download CSV
-      </Button>
-      <br></br> <br></br>
-      <Button
-        variant="outlined"
-        onClick={() => {
-          download("JSON");
-        }}
-        //  startIcon={<DownloadIcon />}
-      >
-        Download JSON
-      </Button>
-      <br></br>
-      <br></br>
       <Accordion
         expanded={expanded}
         onChange={() => {
           setExpanded(!expanded);
         }}
+        style={{ marginBottom: "2rem" }}
       >
         <AccordionSummary
           style={{
@@ -220,7 +151,78 @@ export const ToolbarComponent = (props: any) => {
             })}{" "}
           </FormGroup>
         </AccordionDetails>
-      </Accordion>{" "}
+      </Accordion>
+      <Grid container xs={12} justify="center" alignItems="center">
+        <Grid item xs={4}>
+          <Typography id="range-slider" gutterBottom>
+            Date Range
+          </Typography>
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            label="Start Date"
+            id="filled-size-small1"
+            variant="filled"
+            size="small"
+            value={sliderValue[0]}
+            style={{ width: "80px" }}
+            onChange={(newValue) => {
+              handleDateChange(newValue.currentTarget.value, sliderValue[1]);
+            }}
+          />
+          <TextField
+            label="End Date"
+            id="filled-size-small2"
+            variant="filled"
+            size="small"
+            value={sliderValue[1]}
+            style={{ width: "80px" }}
+            onChange={(newValue) => {
+              handleDateChange(sliderValue[0], newValue.currentTarget.value);
+            }}
+          />
+        </Grid>
+      </Grid>
+      <Slider
+        style={{ width: "120px" }}
+        value={sliderValue}
+        step={10}
+        onChange={handleSliderChange}
+        valueLabelDisplay="auto"
+        aria-labelledby="range-slider"
+        marks={marks}
+        min={1816}
+        max={1900}
+      />
+      <Button onClick={applyDateChange} variant="contained" color="primary">
+        Apply Date Change
+      </Button>
+      <Typography gutterBottom>Number of Results:</Typography>
+      <Typography variant="h5" component="div">
+        {props.tableData.length}
+      </Typography>
+      <br></br>
+      <Button
+        variant="outlined"
+        onClick={() => {
+          download("CSV");
+        }}
+        // startIcon={<DownloadIcon />}
+      >
+        Download CSV
+      </Button>
+      <br></br> <br></br>
+      <Button
+        variant="outlined"
+        onClick={() => {
+          download("JSON");
+        }}
+        //  startIcon={<DownloadIcon />}
+      >
+        Download JSON
+      </Button>
+      <br></br>
+      <br></br>
     </Paper>
   );
 };
@@ -234,5 +236,6 @@ export default connect(mapStateToProps, {
   setMapData,
   setTableData,
   setTimeLineData,
+  setWordCloudData,
   setColumns,
 })(ToolbarComponent);

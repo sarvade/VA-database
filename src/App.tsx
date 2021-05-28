@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import "./App.css";
 import { TabsComponent } from "./components/Tabs";
 import ToolbarComponent from "./components/ToolbarComponent";
-import { setMapData, setTableData, setTimeLineData } from "./redux/actions";
+import { setMapData, setTableData, setTimeLineData, setWordCloudData } from "./redux/actions";
 
 function App() {
   const tableRef = React.createRef();
@@ -34,4 +34,5 @@ export default connect(mapStateToProps, {
   setMapData,
   setTableData,
   setTimeLineData,
+  setWordCloudData,
 })(App);

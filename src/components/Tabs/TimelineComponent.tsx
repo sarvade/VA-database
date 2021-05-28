@@ -4,8 +4,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 export const TimelineComponent = (props: any) => {
-  console.log("TimelineComponent");
-  const chartOptions = {
+    const chartOptions = {
     chart: {
       panning: {
         enabled: false,

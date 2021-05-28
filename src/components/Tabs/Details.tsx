@@ -49,7 +49,7 @@ export const Details = (props: any) => {
               Letter : {props.data.letter}
             </Typography>{" "}
             <Typography className={classes.pos} color="textSecondary">
-              Date Received : {props.data.summary}
+              Summary : {props.data.summary}
             </Typography>
           </CardContent>
         </Grid>
